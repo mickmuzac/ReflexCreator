@@ -1,0 +1,37 @@
+<html>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="./css/style.css" />
+	<script src="js/knockout.min.js" ></script>
+</head>
+
+
+<body>
+	<div><button data-bind="click:addRound">Add Round</button></div>
+	<div data-bind="foreach: roundDef"> 
+		<div class="roundDef">
+			<div data-bind="foreach: entityDef" >
+				<div class="entry">
+				<!--  ko if: !(val() instanceof Array) -->
+
+					<span data-bind="text:name"></span>
+					<input type="text" data-bind="value:val" />
+				<!-- /ko -->
+				<!--  ko if: val() instanceof Array -->
+					<span data-bind="text:name"></span>
+					<a href="#" data-bind="click:function(){$root.addNewCondition(val)}">New</a>
+					<div data-bind="foreach: val">
+						<select data-bind="options:$parent.options, value:metric"></select>
+						<input type="text" data-bind="value:value" /><br/>
+					</div>
+					
+				<!-- /ko -->	
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<button class="entry" data-bind="click:makeJSON">Generate JSON</button>
+	<script src="js/model.js" ></script>
+</body>
+</html>
