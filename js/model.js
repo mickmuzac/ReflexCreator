@@ -2,20 +2,19 @@ var reflexModel = new function(){
 	
 	var self = this,
 	nextCondList = ['time', 'total'],
-	entityPropList = ['type', 'x', 'y', 'size', ];
+	
+	//The next step is to specify movement and speed
+	entityPropList = ['type', 'min x', 'max x', 'min y', 'max y', 'size', 'delay', 'interpolate'];
 	self.addRound  = function(){
 		
 		self.roundDef.push({entityDef:
 		[
 			{name:"minTargets", val: ko.observable(0)},
 			{name:"maxTargets", val: ko.observable(0)},
-			{name:"minX", val: ko.observable(0)},
-			{name:"minY", val: ko.observable(0)},
-			{name:"maxX", val: ko.observable(0)},
-			{name:"maxY", val: ko.observable(0)},
 			{name:"minSimultaneous", val: ko.observable(0)},
 			{name:"maxSimultaneous", val: ko.observable(0)},
-			{name:"entityTemplates", val: ko.observableArray([])},
+			{name:"startTime", val: ko.observable(0)},
+			{name:"entityConditions", val: ko.observableArray([]), options:entityPropList},
 			{name:"entity", val: ko.observableArray([])},
 			{name:"nextConditions", val: ko.observableArray([]), options:nextCondList}
 		]});
@@ -26,7 +25,11 @@ var reflexModel = new function(){
 		console.log(name);
 		switch(obj.name){
 			
-			case "entityTemplates": break;
+			case "entity": 
+				break;
+			case "entityConditions": 
+				obj.val.push({metric:"min x",value:0});
+				break;
 			case "nextConditions":
 				obj.val.push({metric:"",value:0});
 				break;

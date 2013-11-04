@@ -21,8 +21,11 @@
 					<span data-bind="text:name"></span>
 					<a href="#" data-bind="click:$root.addNewCondition">New</a>
 					<div data-bind="foreach: val">
+						
+						
 						<select data-bind="options:$parent.options, value:metric"></select>
 						<input type="text" data-bind="value:value" /><br/>
+						
 					</div>
 					
 				<!-- /ko -->	
