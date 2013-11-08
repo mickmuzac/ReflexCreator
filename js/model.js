@@ -2,9 +2,9 @@ var reflexModel = new function(){
 	
 	var self = this,
 	nextCondList = ['time', 'total'],
+	entityPropList = ['type', 'min x', 'max x', 'min y', 'max y', 'size', 'duration', 'delay'],
+	actionsList = ['deltax', 'deltay'];
 	
-	//The next step is to specify movement and speed
-	entityPropList = ['type', 'min x', 'max x', 'min y', 'max y', 'size', 'delay', 'interpolate'];
 	self.addRound  = function(){
 		
 		self.roundDef.push({entityDef:
@@ -14,8 +14,11 @@ var reflexModel = new function(){
 			{name:"minSimultaneous", val: ko.observable(0)},
 			{name:"maxSimultaneous", val: ko.observable(0)},
 			{name:"startTime", val: ko.observable(0)},
+			{name:"forever", val: ko.observable(false)},
+			{name:"interpolate", val: ko.observable(false)},
+			{name:"gravity", val: ko.observable(false)},
 			{name:"entityConditions", val: ko.observableArray([]), options:entityPropList},
-			{name:"entity", val: ko.observableArray([])},
+			{name:"actions", val: ko.observableArray([]), options:actionsList},
 			{name:"nextConditions", val: ko.observableArray([]), options:nextCondList}
 		]});
 	};
@@ -25,7 +28,8 @@ var reflexModel = new function(){
 		console.log(name);
 		switch(obj.name){
 			
-			case "entity": 
+			case "actions": 
+				obj.val.push({metric:"deltax",value:0});
 				break;
 			case "entityConditions": 
 				obj.val.push({metric:"min x",value:0});
