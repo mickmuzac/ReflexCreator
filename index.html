@@ -13,9 +13,17 @@
 			<div data-bind="foreach: entityDef" >
 				<div class="entry">
 				<!--  ko if: !(val() instanceof Array) -->
-
-					<span data-bind="text:name"></span>
-					<input type="text" data-bind="value:val" />
+					<!-- ko if: isNaN(parseInt(val())) === false -->
+						<span data-bind="text:name"></span>
+						<input type="text" data-bind="value:val" />
+					<!-- /ko -->
+					<!-- ko if: isNaN(parseInt(val())) === true-->
+						<span data-bind="text:name"></span>
+						<select type="text" data-bind="value:val" />
+							<option value="true">true</option>
+							<option value="false" selected="selected">false</option>
+						</select>
+					<!-- /ko -->
 				<!-- /ko -->
 				<!--  ko if: val() instanceof Array -->
 					<span data-bind="text:name"></span>
