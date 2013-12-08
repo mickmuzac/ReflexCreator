@@ -10,15 +10,15 @@
 	<div><button data-bind="click:addRound">Add Round</button></div>
 	<div data-bind="foreach: roundDef"> 
 		<div class="roundDef">
-			<div data-bind="foreach: entityDef" >
-				<div class="entry">
+			<div data-bind="foreach: Object.keys(entityDef)" >
+				<div class="entry" data-bind="with: $parent.entityDef[$data]">
 				<!--  ko if: !(val() instanceof Array) -->
 					<!-- ko if: isNaN(parseInt(val())) === false -->
-						<span data-bind="text:name"></span>
+						<span data-bind="text:$parent"></span>
 						<input type="text" data-bind="value:val" />
 					<!-- /ko -->
 					<!-- ko if: isNaN(parseInt(val())) === true-->
-						<span data-bind="text:name"></span>
+						<span data-bind="text:$parent"></span>
 						<select type="text" data-bind="value:val" />
 							<option value="true">true</option>
 							<option value="false" selected="selected">false</option>
@@ -26,7 +26,7 @@
 					<!-- /ko -->
 				<!-- /ko -->
 				<!--  ko if: val() instanceof Array -->
-					<span data-bind="text:name"></span>
+					<span data-bind="text:$parent"></span>
 					<a href="#" data-bind="click:$root.addNewCondition">New</a>
 					<div data-bind="foreach: val">
 						
@@ -42,7 +42,9 @@
 		</div>
 	</div>
 	
-	<button class="entry" data-bind="click:makeJSON">Generate JSON</button>
+	<button class="entry" data-bind="click:makeJSON">Generate JSON</button><br/><br/>
+	<textarea data-bind="value:loadValue, valueUpdate: 'afterkeydown'"></textarea><br/>
+	<button data-bind="click:loadJSON">Load JSON</button>
 	<script src="js/model.js" ></script>
 </body>
 </html>
