@@ -9,10 +9,8 @@ var reflexModel = new function(){
 		
 		self.roundDef.push({entityDef:
 		{
-			minTargets: {val: ko.observable(0)},
-			maxTargets: {val: ko.observable(0)},
-			minSimultaneous: {val: ko.observable(0)},
-			maxSimultaneous: {val: ko.observable(0)},
+			targets: {val: ko.observable(0)},
+			simultaneous: {val: ko.observable(0)},
 			startTime: {val: ko.observable(0)},
 			forever: {val: ko.observable(false)},
 			interpolate: {val: ko.observable(false)},
