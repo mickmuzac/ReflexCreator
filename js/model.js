@@ -2,8 +2,9 @@ var reflexModel = new function(){
 	
 	var self = this,
 	nextCondList = ['time', 'total'],
-	entityPropList = ['type', 'min x', 'max x', 'min y', 'max y', 'size', 'duration', 'delay'],
-	actionsList = ['deltax', 'deltay'];
+	entityPropList = ['type', 'min x', 'max x', 'min y', 'max y', 'size', 'duration', 'delay', 'difficulty'],
+	actionsList = ['deltax', 'deltay'],
+	typeValues = ['circle', 'square', 'triangle'];
 	self.loadValue = ko.observable("");
 	self.addRound  = function(){
 		
@@ -51,6 +52,10 @@ var reflexModel = new function(){
 		}
 		
 		console.log(ko.toJSON({roundDef:roundDef}));
+		$.post("/save", ko.toJSON({roundDef:roundDef}), function(){
+			
+			console.log("Sent to server");
+		});
 	};
 
 	self.loadJSON = function(str){

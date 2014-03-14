@@ -3,6 +3,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="./css/style.css" />
 	<script src="js/knockout.min.js" ></script>
+	<script src="js/jquery.js" ></script>
 </head>
 
 
@@ -42,7 +43,7 @@
 		</div>
 	</div>
 	
-	<button class="entry" data-bind="click:makeJSON">Generate JSON</button><br/><br/>
+	<button class="entry" data-bind="click:makeJSON">Save JSON</button><br/><br/>
 	<textarea data-bind="value:loadValue, valueUpdate: 'afterkeydown'"></textarea><br/>
 	<button data-bind="click:loadJSON">Load JSON</button>
 	<script src="js/model.js" ></script>

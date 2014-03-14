@@ -1,0 +1,10 @@
+{
+	"name": "reflex-creator",
+	"version": "0.0.1-alpha",
+	"description": "Level creator for Impressflow reflex based games",
+	"dependencies": {
+		"express": "3.4.x",
+		"hogan-express": "0.5.x"
+    },
+	"author":"Mick Muzac <mmuzac23@gmail.com>"
+}
