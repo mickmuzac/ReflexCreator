@@ -9,7 +9,8 @@ var reflexModel = new function(){
 	self.currentWorldName = ko.observable("");
 	self.addWorld  = function(){
 		
-		self.worldList.push({name: self.currentWorldName()});
+		self.worldList.push({name: self.currentWorldName(),
+							 levels: ko.observableArray([]])});
 	};
 	self.addRound  = function(){
 		
@@ -95,5 +96,7 @@ var reflexModel = new function(){
 		console.log(ko.toJSON(roundDef));
 	};
 };
+
+
 
 ko.applyBindings(reflexModel);

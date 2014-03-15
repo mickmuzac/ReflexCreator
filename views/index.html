@@ -9,6 +9,9 @@
 
 <body>
 	<div><input type="text" data-bind="value:currentWorldName" /><button data-bind="click:addWorld">Add World</button></div>
+	<ul data-bind="foreach: worldList">
+		<li data-bind="text: name"></li>
+	</ul>
 	<div data-bind="visible:false">
 	
 		<div><button data-bind="click:addRound">Add Round</button></div>
