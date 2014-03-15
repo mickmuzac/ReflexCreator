@@ -8,40 +8,46 @@
 
 
 <body>
-	<div><button data-bind="click:addRound">Add Round</button></div>
-	<div data-bind="foreach: roundDef"> 
-		<div class="roundDef">
-			<div data-bind="foreach: Object.keys(entityDef)" >
-				<div class="entry" data-bind="with: $parent.entityDef[$data]">
-				<!--  ko if: !(val() instanceof Array) -->
-					<!-- ko if: isNaN(parseInt(val())) === false -->
-						<span data-bind="text:$parent"></span>
-						<input type="text" data-bind="value:val" />
+	<div><input type="text" data-bind="value:currentWorldName" /><button data-bind="click:addWorld">Add World</button></div>
+	<div data-bind="visible:false">
+	
+		<div><button data-bind="click:addRound">Add Round</button></div>
+		<div data-bind="foreach: roundDef"> 
+			<div class="roundDef">
+				<div data-bind="foreach: Object.keys(entityDef)" >
+					<div class="entry" data-bind="with: $parent.entityDef[$data]">
+					<!--  ko if: !(val() instanceof Array) -->
+						<!-- ko if: isNaN(parseInt(val())) === false -->
+							<span data-bind="text:$parent"></span>
+							<input type="text" data-bind="value:val" />
+						<!-- /ko -->
+						<!-- ko if: isNaN(parseInt(val())) === true-->
+							<span data-bind="text:$parent"></span>
+							<select type="text" data-bind="value:val" />
+								<option value="true">true</option>
+								<option value="false" selected="selected">false</option>
+							</select>
+						<!-- /ko -->
 					<!-- /ko -->
-					<!-- ko if: isNaN(parseInt(val())) === true-->
+					<!--  ko if: val() instanceof Array -->
 						<span data-bind="text:$parent"></span>
-						<select type="text" data-bind="value:val" />
-							<option value="true">true</option>
-							<option value="false" selected="selected">false</option>
-						</select>
-					<!-- /ko -->
-				<!-- /ko -->
-				<!--  ko if: val() instanceof Array -->
-					<span data-bind="text:$parent"></span>
-					<a href="#" data-bind="click:$root.addNewCondition">New</a>
-					<div data-bind="foreach: val">
+						<a href="#" data-bind="click:$root.addNewCondition">New</a>
+						<div data-bind="foreach: val">
+							
+							
+							<select data-bind="options:$parent.options, value:metric"></select>
+							<input type="text" data-bind="value:value" /><br/>
+							
+						</div>
 						
-						
-						<select data-bind="options:$parent.options, value:metric"></select>
-						<input type="text" data-bind="value:value" /><br/>
-						
+					<!-- /ko -->	
 					</div>
-					
-				<!-- /ko -->	
 				</div>
 			</div>
 		</div>
 	</div>
+	
+
 	
 	<button class="entry" data-bind="click:makeJSON">Save JSON</button><br/><br/>
 	<textarea data-bind="value:loadValue, valueUpdate: 'afterkeydown'"></textarea><br/>

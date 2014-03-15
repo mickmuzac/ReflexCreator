@@ -6,6 +6,11 @@ var reflexModel = new function(){
 	actionsList = ['deltax', 'deltay'],
 	typeValues = ['circle', 'square', 'triangle'];
 	self.loadValue = ko.observable("");
+	self.currentWorldName = ko.observable("");
+	self.addWorld  = function(){
+		
+		self.worldList.push({name: self.currentWorldName()});
+	};
 	self.addRound  = function(){
 		
 		self.roundDef.push({entityDef:
@@ -22,6 +27,7 @@ var reflexModel = new function(){
 		}});
 	};
 	self.roundDef  = ko.observableArray([]);	
+	self.worldList  = ko.observableArray([]);	
 	self.addNewCondition = function(obj){
 		//arr.push({metric:"",value:0});
 		console.log(obj);
@@ -52,7 +58,7 @@ var reflexModel = new function(){
 		}
 		
 		console.log(ko.toJSON({roundDef:roundDef}));
-		$.post("/save", ko.toJSON({roundDef:roundDef}), function(){
+		$.post("/save", ko.toJS({roundDef:roundDef}), function(){
 			
 			console.log("Sent to server");
 		});

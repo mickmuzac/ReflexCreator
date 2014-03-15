@@ -8,7 +8,6 @@ app.use(express.methodOverride());
 
 app.set('view engine', 'html');
 app.set('layout', 'layout');
-app.enable('view cache');
 app.engine('html', require('hogan-express'));
 
 app.get('/', function(req, res){
@@ -21,14 +20,25 @@ app.get('/:type(css|js)/:file([A-Za-z0-9\\.]+)', function(req, res){
 	});
 });
 
-app.post("/save", function(req, res){
-	
-	console.log(req.body);
-	res.end();
-	fs.writeFile(__dirname + "/data/levels.json", req.body,function(err){
+app.get('/data', function(req, res){
+  res.end(JSON.stringify(dataObj));
+});
+
+app.post("/save", function(req, res){	
+	try{
 		
+		var jsonData = JSON.stringify(req.body);
+		fs.writeFile(__dirname + "/data/levels.json", jsonData,function(err){
+			dataObj = req.body;
+			res.end("data file successfully saved");
+		});
+	}
+	catch(e){
 		
-	});
+		//console.log(req.body.roundDef);
+		console.error("Error saving data file: ", e);
+		res.end("error saving data file");
+	}
 });
 
 //Initialize
@@ -44,11 +54,8 @@ app.post("/save", function(req, res){
 				}
 				
 				catch(e){
-					console.error(e);
-				}
-				
-				finally{
 					dataObj = {};
+					console.error(e);
 				}
 			});
 		}
