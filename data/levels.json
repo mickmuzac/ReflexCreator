@@ -1,1 +1,1 @@
-{"roundDef":[{"entityDef":{"targets":"0","simultaneous":"0","startTime":"0","forever":"false","interpolate":"false","gravity":"false"}}]}
+{"list":[{"name":"sfdasf","levels":[null,{"roundList":[{"entityDef":{"targets":{"val":"3"},"simultaneous":{"val":"0"},"startTime":{"val":"0"},"forever":{"val":"false"},"interpolate":{"val":"false"},"gravity":{"val":"false"},"entityConditions":{"options":["type","min x","max x","min y","max y","size","duration","delay","difficulty"]},"actions":{"options":["deltax","deltay"]},"nextConditions":{"options":["time","total"]}}}]}]}]}

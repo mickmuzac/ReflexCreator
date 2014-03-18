@@ -10,3 +10,33 @@
 	float:left;
 	width:33%;
 }
+
+.worldList{
+	float: left;
+	width: 12%;
+}
+.levelList{
+	float: left;
+	width: 12%;
+}
+.roundList{
+	float: left;
+	width: 76%;
+}
+.roundList h1{
+	text-align: center;
+}
+
+.wrapper{
+	min-height: 300px;
+	width: 100%;
+	clear: both;
+}
+
+li{
+	font-size: 20px;
+}
+
+input, select{
+	clear: right;
+}

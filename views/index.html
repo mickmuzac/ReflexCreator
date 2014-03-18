@@ -8,53 +8,69 @@
 
 
 <body>
-	<div><input type="text" data-bind="value:currentWorldName" /><button data-bind="click:addWorld">Add World</button></div>
-	<ul data-bind="foreach: worldList">
-		<li data-bind="text: name"></li>
-	</ul>
-	<div data-bind="visible:false">
-	
-		<div><button data-bind="click:addRound">Add Round</button></div>
-		<div data-bind="foreach: roundDef"> 
-			<div class="roundDef">
-				<div data-bind="foreach: Object.keys(entityDef)" >
-					<div class="entry" data-bind="with: $parent.entityDef[$data]">
-					<!--  ko if: !(val() instanceof Array) -->
-						<!-- ko if: isNaN(parseInt(val())) === false -->
-							<span data-bind="text:$parent"></span>
-							<input type="text" data-bind="value:val" />
-						<!-- /ko -->
-						<!-- ko if: isNaN(parseInt(val())) === true-->
-							<span data-bind="text:$parent"></span>
-							<select type="text" data-bind="value:val" />
-								<option value="true">true</option>
-								<option value="false" selected="selected">false</option>
-							</select>
-						<!-- /ko -->
-					<!-- /ko -->
-					<!--  ko if: val() instanceof Array -->
-						<span data-bind="text:$parent"></span>
-						<a href="#" data-bind="click:$root.addNewCondition">New</a>
-						<div data-bind="foreach: val">
-							
-							
-							<select data-bind="options:$parent.options, value:metric"></select>
-							<input type="text" data-bind="value:value" /><br/>
-							
-						</div>
-						
-					<!-- /ko -->	
+	<div class="wrapper">
+		<div class="worldList">
+			<h1>List of worlds</h1>
+			<ul data-bind="foreach: worldList">
+				<li><a data-bind="text: name, click: $root.selectWorld, attr:{href:'#' + name}"></a></li>
+			</ul>
+			<div><input type="text" data-bind="value:currentWorldName" /><button data-bind="click:addWorld">Add World</button></div>
+		</div>
+		
+		<div class="levelList">
+			<h1 data-bind="text: currentWorld().name"></h1>
+			<ul data-bind="foreach: currentWorld().levels">
+				<li><a data-bind="text: 'Level ' + ($index()+1), click: $root.selectLevel" href=""></a></li>
+			</ul>
+			<div data-bind="visible:currentWorld()"><button data-bind="click:addLevel">Add Level</button></div>
+		</div>
+		
+		<div class="roundList">
+			<h1 data-bind="text: currentWorld().name"></h1>
+			<div data-bind="foreach: currentLevel().roundList"> 
+
+
+					<span>targets</span>
+					<input type="text" data-bind="value:targets" />
+
+					<span>simultaneous</span>
+					<input type="text" data-bind="value:simultaneous" />
+
+					<span>startTime</span>
+					<input type="text" data-bind="value:startTime" />
+
+
+					<span>forever</span>
+					<select type="text" data-bind="value:forever" />
+						<option value="true">true</option>
+						<option value="false" selected="selected">false</option>
+					</select>
+
+					<span>interpolate</span>
+					<select type="text" data-bind="value:interpolate" />
+						<option value="true">true</option>
+						<option value="false" selected="selected">false</option>
+					</select>
+
+					<span>gravity</span>
+					<select type="text" data-bind="value:gravity" />
+						<option value="true">true</option>
+						<option value="false" selected="selected">false</option>
+					</select>
+				
+					<span>entityConditions</span>
+					<a href="#" data-bind="click:$root.addNewCondition">New</a>
+					<div data-bind="foreach: entityConditions">
+						<select data-bind="options: $root.nextCondList, value:$data"></select>
+						<input type="text" data-bind="value:$data" /><br/>
 					</div>
-				</div>
 			</div>
+			<div><button data-bind="click:addRound">Add Round</button></div>
 		</div>
 	</div>
-	
 
 	
-	<button class="entry" data-bind="click:makeJSON">Save JSON</button><br/><br/>
-	<textarea data-bind="value:loadValue, valueUpdate: 'afterkeydown'"></textarea><br/>
-	<button data-bind="click:loadJSON">Load JSON</button>
+	<button class="entry" data-bind="click:makeJSON">Save</button><br/><br/>
 	<script src="js/model.js" ></script>
 </body>
 </html>

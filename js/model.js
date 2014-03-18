@@ -1,56 +1,58 @@
 var reflexModel = new function(){
 	
-	var self = this,
-	nextCondList = ['time', 'total'],
-	entityPropList = ['type', 'min x', 'max x', 'min y', 'max y', 'size', 'duration', 'delay', 'difficulty'],
-	actionsList = ['deltax', 'deltay'],
-	typeValues = ['circle', 'square', 'triangle'];
-	self.loadValue = ko.observable("");
+	var self = this;
+	self.nextCondList = ['time', 'total'],
+	self.entityPropList = ['type', 'min x', 'max x', 'min y', 'max y', 'size', 'duration', 'delay', 'difficulty'],
+	self.actionsList = ['deltax', 'deltay'],
+	self.typeValues = ['circle', 'square', 'triangle'];
+	
 	self.currentWorldName = ko.observable("");
+	self.currentWorld = ko.observable(false);
+	self.currentLevel = ko.observable(false);
+	
 	self.addWorld  = function(){
-		
-		self.worldList.push({name: self.currentWorldName(),
-							 levels: ko.observableArray([]])});
+		self.worldList.push(ko.observable({name: self.currentWorldName(), levels: ko.observableArray([])}));
 	};
-	self.addRound  = function(){
+	
+	self.selectWorld  = function(currentWorld){
+		self.currentWorld(currentWorld);
+		self.currentLevel(false);
+		return true;
+	}
+	
+	self.selectLevel  = function(currentLevel){
+		self.currentLevel(currentLevel);
+	}
+	
+	self.addLevel = function(test){
+		self.currentWorld().levels.push(ko.observable({roundList:ko.observableArray()}));
+		console.log(test);
+	}
+	
+	self.addRound = function(){
 		
-		self.roundDef.push({entityDef:
-		{
-			targets: {val: ko.observable(0)},
-			simultaneous: {val: ko.observable(0)},
-			startTime: {val: ko.observable(0)},
-			forever: {val: ko.observable(false)},
-			interpolate: {val: ko.observable(false)},
-			gravity: {val: ko.observable(false)},
-			entityConditions: {val: ko.observableArray([]), options:entityPropList},
-			actions: {val: ko.observableArray([]), options:actionsList},
-			nextConditions: {val: ko.observableArray([]), options:nextCondList}
-		}});
+		self.currentLevel().roundList.push({
+			targets: ko.observable(0),
+			simultaneous: ko.observable(0),
+			startTime:  ko.observable(0),
+			forever: ko.observable(false),
+			interpolate: ko.observable(false),
+			gravity: ko.observable(false),
+			entityConditions: ko.observableArray([]),
+			actions: ko.observableArray([]),
+			nextConditions: ko.observableArray([])
+		});
 	};
-	self.roundDef  = ko.observableArray([]);	
+		
 	self.worldList  = ko.observableArray([]);	
 	self.addNewCondition = function(obj){
 		//arr.push({metric:"",value:0});
 		console.log(obj);
 		
-		/*
-		 * This isn't terribly stable. Find another way to determine array type 
-		 */
-		switch(obj.options[0]){
-			
-			case "deltax": 
-				obj.val.push({metric:"deltax",value:0});
-				break;
-			case "type": 
-				obj.val.push({metric:"min x",value:0});
-				break;
-			case "time":
-				obj.val.push({metric:"",value:0});
-				break;
-		}
+		obj.val.push({metric:obj.options[0],value:0});
 	};
 	self.makeJSON = function(){
-		var roundDef = ko.toJS(self.roundDef);
+		/*var roundDef = ko.toJS(self.roundDef);
 		
 		for(var i = 0; i < roundDef.length; i++){
 			for(var key in roundDef[i].entityDef){
@@ -58,8 +60,8 @@ var reflexModel = new function(){
 			}
 		}
 		
-		console.log(ko.toJSON({roundDef:roundDef}));
-		$.post("/save", ko.toJS({roundDef:roundDef}), function(){
+		console.log(ko.toJSON({roundDef:roundDef}));*/
+		$.post("/save", ko.toJS({list:self.worldList}), function(){
 			
 			console.log("Sent to server");
 		});
@@ -69,13 +71,7 @@ var reflexModel = new function(){
 		var roundDef;
 		try{
 			//Change later once other properties are added..
-			if(typeof str == "string")
-				roundDef = JSON.parse(str).roundDef;
-				
-			else {
-				roundDef = JSON.parse(str.loadValue()).roundDef;
-				str.loadValue("");
-			}
+			roundDef = JSON.parse(str).roundDef;
 		}
 		catch(e){
 			console.error(e);
@@ -97,6 +93,8 @@ var reflexModel = new function(){
 	};
 };
 
-
-
-ko.applyBindings(reflexModel);
+$.get('/data',function(data){
+	console.log(data);
+	
+	ko.applyBindings(reflexModel);
+});
