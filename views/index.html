@@ -11,25 +11,27 @@
 	<div class="wrapper">
 		<div class="worldList">
 			<h1>List of worlds</h1>
+			<div><input type="text" data-bind="value:currentWorldName" /><button data-bind="click:addWorld">Add World</button></div>
 			<ul data-bind="foreach: worldList">
 				<li><a data-bind="text: name, click: $root.selectWorld, attr:{href:'#' + name}"></a></li>
 			</ul>
-			<div><input type="text" data-bind="value:currentWorldName" /><button data-bind="click:addWorld">Add World</button></div>
 		</div>
 		
 		<div class="levelList">
 			<h1 data-bind="text: currentWorld().name"></h1>
-			<ul data-bind="foreach: currentWorld().levels">
-				<li><a data-bind="text: 'Level ' + ($index()+1), click: $root.selectLevel" href=""></a></li>
-			</ul>
 			<div data-bind="visible:currentWorld()"><button data-bind="click:addLevel">Add Level</button></div>
+			<ul data-bind="foreach: currentWorld().levels">
+				<li><a data-bind="text: name, click: $root.selectLevel" href=""></a></li>
+			</ul>
 		</div>
 		
 		<div class="roundList">
-			<h1 data-bind="text: currentWorld().name"></h1>
+			<h1 data-bind="text: currentLevel().name"></h1>
+			<div><button data-bind="click:addRound, visible: currentLevel()">Add Round</button></div>
 			<div data-bind="foreach: currentLevel().roundList"> 
+				<div class="roundElement"> 
 
-
+					<h2 data-bind="text:'Round ' + ($index()+1)"></h2>
 					<span>targets</span>
 					<input type="text" data-bind="value:targets" />
 
@@ -57,15 +59,43 @@
 						<option value="true">true</option>
 						<option value="false" selected="selected">false</option>
 					</select>
-				
-					<span>entityConditions</span>
-					<a href="#" data-bind="click:$root.addNewCondition">New</a>
-					<div data-bind="foreach: entityConditions">
-						<select data-bind="options: $root.nextCondList, value:$data"></select>
-						<input type="text" data-bind="value:$data" /><br/>
+					
+					<div class="condition-block">
+						<span>entityConditions</span>
+						<a href="#" data-bind="click:function(){$root.addNewCondition(entityConditions)}">New</a>
+						<div data-bind="foreach: entityConditions">
+							<select data-bind="options: $root.entityConditions, value:type"></select>
+							<input type="text" data-bind="value:value" />
+						</div>
 					</div>
+					
+					<div class="condition-block">
+						<span>nextConditions</span>
+						<a href="#" data-bind="click:function(){$root.addNewCondition(nextConditions)}">New</a>
+						<div data-bind="foreach: nextConditions">
+							<select data-bind="options: $root.nextConditions, value:type"></select>
+							<input type="text" data-bind="value:value" />
+							<span>X</span>
+						</div>
+					</div>
+					
+					<div class="condition-block">
+						<span>actions</span>
+						<a href="#" data-bind="click:function(){$root.addNewCondition(actions)}">New</a>
+						<div data-bind="foreach: actions">
+							<select data-bind="options: $root.actions, value:type"></select>
+							<input type="text" data-bind="value:value" />
+						</div>
+					</div>
+					
+					
+					
+					
+					
+					
+					
+				</div>
 			</div>
-			<div><button data-bind="click:addRound">Add Round</button></div>
 		</div>
 	</div>
 

@@ -35,8 +35,39 @@
 
 li{
 	font-size: 20px;
+	margin: 5px 0;
 }
 
-input, select{
-	clear: right;
+.roundElement{
+	width: 25%;
+	float: left;
+}
+
+.roundElement input, .roundElement select{
+	display:block;
+	clear: right;	
+	margin: 20px 0;
+}
+
+.roundElement span{
+	display: block;
+	float: left;
+	margin: 0 20px 20px 0;
+}
+
+.condition-block{
+	width: 100%;
+	clear:both;
+	float:left;
+}
+.condition-block div{
+	float: right;
+	width: 50%;
+	margin-top: 10px;
+}
+.condition-block input, .condition-block select{
+	margin: 5px 5px;
+	clear: none;
+	width: 40%;
+	float: left;
 }

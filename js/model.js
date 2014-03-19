@@ -1,9 +1,9 @@
 var reflexModel = new function(){
 	
 	var self = this;
-	self.nextCondList = ['time', 'total'],
-	self.entityPropList = ['type', 'min x', 'max x', 'min y', 'max y', 'size', 'duration', 'delay', 'difficulty'],
-	self.actionsList = ['deltax', 'deltay'],
+	self.nextConditions = ['time', 'total'],
+	self.entityConditions = ['type', 'min x', 'max x', 'min y', 'max y', 'size', 'duration', 'delay', 'difficulty'],
+	self.actions = ['deltax', 'deltay'],
 	self.typeValues = ['circle', 'square', 'triangle'];
 	
 	self.currentWorldName = ko.observable("");
@@ -25,7 +25,7 @@ var reflexModel = new function(){
 	}
 	
 	self.addLevel = function(test){
-		self.currentWorld().levels.push(ko.observable({roundList:ko.observableArray()}));
+		self.currentWorld().levels.push(ko.observable({name: 'Level ' + (self.currentWorld().levels().length+1), roundList:ko.observableArray()}));
 		console.log(test);
 	}
 	
@@ -48,8 +48,7 @@ var reflexModel = new function(){
 	self.addNewCondition = function(obj){
 		//arr.push({metric:"",value:0});
 		console.log(obj);
-		
-		obj.val.push({metric:obj.options[0],value:0});
+		obj.push({type:"",value:0});
 	};
 	self.makeJSON = function(){
 		/*var roundDef = ko.toJS(self.roundDef);
@@ -95,6 +94,5 @@ var reflexModel = new function(){
 
 $.get('/data',function(data){
 	console.log(data);
-	
 	ko.applyBindings(reflexModel);
 });
