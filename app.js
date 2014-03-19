@@ -21,15 +21,19 @@ app.get('/:type(css|js)/:file([A-Za-z0-9\\.]+)', function(req, res){
 });
 
 app.get('/data', function(req, res){
-  res.end(JSON.stringify(dataObj));
+  res.end(dataObj);
 });
 
 app.post("/save", function(req, res){	
 	try{
-		
-		var jsonData = JSON.stringify(req.body);
-		fs.writeFile(__dirname + "/data/levels.json", jsonData,function(err){
-			dataObj = req.body;
+
+		fs.writeFile(__dirname + "/data/levels.json", req.body.base64, function(err){
+			dataObj = req.body.base64;
+			res.end("data file successfully saved");
+		});
+
+		fs.writeFile(__dirname + "/data/worldList.json", JSON.stringify(JSON.parse(new Buffer(req.body.base64, 'base64').toString('binary')).worldList), function(err){
+			dataObj = req.body.base64;
 			res.end("data file successfully saved");
 		});
 	}
@@ -47,21 +51,12 @@ app.post("/save", function(req, res){
 	fs.exists(__dirname + "/data/levels.json", function(exists){
 		if(exists){
 			fs.readFile(__dirname + "/data/levels.json", function(err, data){
-				
-				try{
-					var jsonData = JSON.parse(data);
-					dataObj = jsonData;
-				}
-				
-				catch(e){
-					dataObj = {};
-					console.error(e);
-				}
+				dataObj = data;
 			});
 		}
 		
 		else{
-			dataObj = {};
+			dataObj = '';
 		}
 	});
 
