@@ -57,7 +57,7 @@ $.get('/data',function(data){
 	}
 	
 	self.addLevel = function(test){
-		self.currentWorld().levels.push(ko.observable({name: 'Level ' + (self.currentWorld().levels().length+1), roundList:ko.observableArray()}));
+		self.currentWorld().levels.push(ko.observable({name: 'Level ' + (self.currentWorld().levels().length+1), timeLimit: 0, gameType: 0, roundList:ko.observableArray()}));
 		console.log(test);
 	}
 	
@@ -79,7 +79,7 @@ $.get('/data',function(data){
 	self.addNewCondition = function(obj){
 		//arr.push({metric:"",value:0});
 		console.log(obj);
-		obj.push({type:"",value:0});
+		obj.push({key:"",value:0});
 	};
 	
 	

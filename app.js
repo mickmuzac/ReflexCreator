@@ -32,7 +32,7 @@ app.post("/save", function(req, res){
 			res.end("data file successfully saved");
 		});
 
-		fs.writeFile(__dirname + "/data/worldList.json", JSON.stringify(JSON.parse(new Buffer(req.body.base64, 'base64').toString('binary')).worldList), function(err){
+		fs.writeFile(__dirname + "/data/worldList.json", JSON.stringify({worldList:JSON.parse(new Buffer(req.body.base64, 'base64').toString('binary')).worldList}), function(err){
 			dataObj = req.body.base64;
 			res.end("data file successfully saved");
 		});
