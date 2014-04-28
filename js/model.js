@@ -57,7 +57,7 @@ $.get('/data',function(data){
 	}
 	
 	self.addLevel = function(test){
-		self.currentWorld().levels.push(ko.observable({name: 'Level ' + (self.currentWorld().levels().length+1), timeLimit: 0, gameType: 0, roundList:ko.observableArray()}));
+		self.currentWorld().levels.push(ko.observable({name: 'Level ' + (self.currentWorld().levels().length+1), timeLimit: 0, mode: ko.observableArray(0), roundList:ko.observableArray()}));
 		console.log(test);
 	}
 	
