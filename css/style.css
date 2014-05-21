@@ -62,12 +62,12 @@ li{
 }
 .condition-block div{
 	float: right;
-	width: 50%;
+	width: 60%;
 	margin-top: 10px;
 }
 .condition-block input, .condition-block select{
 	margin: 5px 5px;
 	clear: none;
-	width: 40%;
+	width: 35%;
 	float: left;
 }

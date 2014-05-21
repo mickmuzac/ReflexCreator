@@ -69,6 +69,7 @@
 						<div data-bind="foreach: entityConditions">
 							<select data-bind="options: $root.entityConditions, value:key"></select>
 							<input type="text" data-bind="value:value" />
+							<span data-bind="click:function(obj){$root.deleteEntityCondition(obj, $parent)}">x</span>
 						</div>
 					</div>
 					
@@ -136,9 +137,11 @@
 					<div class="condition-block">
 						<span>entityConditions</span>
 						<a href="#" data-bind="click:function(){$root.addNewCondition(entityConditions)}">New</a>
-						<div data-bind="foreach: entityConditions">
+						<div style="clear:both;float:right;" data-bind="foreach: entityConditions">
+							
 							<select data-bind="options: $root.entityConditions, value:key"></select>
 							<input type="text" data-bind="value:value" />
+							<span data-bind="click:function(obj){$root.deleteEntityCondition(obj, $parent)}">x</span>
 						</div>
 					</div>
 					
@@ -148,7 +151,7 @@
 						<div data-bind="foreach: nextConditions">
 							<select data-bind="options: $root.nextConditions, value:key"></select>
 							<input type="text" data-bind="value:value" />
-							<span>X</span>
+							<span data-bind="click:$root.deleteEntityConditionTutorial">X</span>
 						</div>
 					</div>
 					

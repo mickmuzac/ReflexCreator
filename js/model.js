@@ -115,8 +115,17 @@ $.get('/data',function(data){
 	self.addNewCondition = function(obj){
 		//arr.push({metric:"",value:0});
 		console.log(obj);
-		obj.push({key:"",value:0});
+		obj.push({
+			key:"",
+			value:0
+		});
 	};
+	
+	self.deleteEntityCondition = function(obj, parent){
+		
+		console.log(obj, parent);
+		parent.entityConditions.remove(obj);
+	}
 	
 	
 	ko.applyBindings(reflexModel);
