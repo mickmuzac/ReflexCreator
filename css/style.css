@@ -43,7 +43,7 @@ li{
 	float: left;
 }
 
-.roundElement input, .roundElement select{
+.roundElement input, .roundElement select, textarea{
 	display:block;
 	clear: right;	
 	margin: 20px 0;

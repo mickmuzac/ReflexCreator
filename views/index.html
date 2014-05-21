@@ -31,6 +31,7 @@
 		<div class="roundList">
 			<h1 data-bind="text: currentLevel().name"></h1>
 			<div><button data-bind="click:addRound, visible: currentLevel()">Add Round</button></div>
+			
 			<div data-bind="foreach: currentLevel().roundList"> 
 				<div class="roundElement"> 
 
@@ -43,7 +44,6 @@
 
 					<span>startTime</span>
 					<input type="text" data-bind="value:startTime" />
-
 
 					<span>forever</span>
 					<select type="text" data-bind="value:forever" />
@@ -90,16 +90,81 @@
 							<input type="text" data-bind="value:value" />
 						</div>
 					</div>
-					
-					
-					
-					
-					
-					
-					
 				</div>
 			</div>
 		</div>
+		
+		<div class="tutorialRoundList">
+			
+			<div><button data-bind="click:addTutorialRound, visible: currentLevel()">Add Tutorial Round</button></div>
+			<div data-bind="visible:currentTutorial()">Tutorial Game Type <input type="text" data-bind="value:currentTutorial() ? currentTutorial().mode : 0" /></div>
+			<div data-bind="foreach: currentTutorial() ? currentTutorial().roundList : []"> 
+				<div class="roundElement"> 
+
+					<h2 data-bind="text:'Round ' + ($index()+1)"></h2>
+					<span>targets</span>
+					<input type="text" data-bind="value:targets" />
+
+					<span>simultaneous</span>
+					<input type="text" data-bind="value:simultaneous" />
+
+					<span>startTime</span>
+					<input type="text" data-bind="value:startTime" />
+					
+					
+					<span>message</span>
+					<textarea data-bind="value:message"></textarea>
+
+					<span>forever</span>
+					<select type="text" data-bind="value:forever" />
+						<option value="true">true</option>
+						<option value="false" selected="selected">false</option>
+					</select>
+
+					<span>interpolate</span>
+					<select type="text" data-bind="value:interpolate" />
+						<option value="true">true</option>
+						<option value="false" selected="selected">false</option>
+					</select>
+
+					<span>gravity</span>
+					<select type="text" data-bind="value:gravity" />
+						<option value="true">true</option>
+						<option value="false" selected="selected">false</option>
+					</select>
+					
+					<div class="condition-block">
+						<span>entityConditions</span>
+						<a href="#" data-bind="click:function(){$root.addNewCondition(entityConditions)}">New</a>
+						<div data-bind="foreach: entityConditions">
+							<select data-bind="options: $root.entityConditions, value:key"></select>
+							<input type="text" data-bind="value:value" />
+						</div>
+					</div>
+					
+					<div class="condition-block">
+						<span>nextConditions</span>
+						<a href="#" data-bind="click:function(){$root.addNewCondition(nextConditions)}">New</a>
+						<div data-bind="foreach: nextConditions">
+							<select data-bind="options: $root.nextConditions, value:key"></select>
+							<input type="text" data-bind="value:value" />
+							<span>X</span>
+						</div>
+					</div>
+					
+					<div class="condition-block">
+						<span>actions</span>
+						<a href="#" data-bind="click:function(){$root.addNewCondition(actions)}">New</a>
+						<div data-bind="foreach: actions">
+							<select data-bind="options: $root.actions, value:key"></select>
+							<input type="text" data-bind="value:value" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
 	</div>
 
 	

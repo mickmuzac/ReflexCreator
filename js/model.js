@@ -6,6 +6,7 @@ var reflexModel = new function(){
 	self.currentWorld = ko.observable(false);
 	self.currentLevel = ko.observable(false);		
 	self.worldList  = ko.observableArray([]);	
+	self.currentTutorial = ko.observable(false);
 };
 
 
@@ -41,25 +42,43 @@ $.get('/data',function(data){
 	self.currentWorldName = ko.observable("");
 	self.currentWorld = ko.observable(false);
 	self.currentLevel = ko.observable(false);
+	self.currentTutorial = ko.observable(false);
 	
 	self.addWorld  = function(){
-		self.worldList.push(ko.observable({name: self.currentWorldName(), levels: ko.observableArray([])}));
+		self.worldList.push(ko.observable({
+			name: self.currentWorldName(), 
+			levels: ko.observableArray([])
+		}));
 	};
 	
-	self.selectWorld  = function(currentWorld){
+	self.selectWorld = function(currentWorld){
 		self.currentWorld(currentWorld);
 		self.currentLevel(false);
+		self.currentTutorial(false);
 		return true;
-	}
+	};
 	
-	self.selectLevel  = function(currentLevel){
+	self.selectLevel = function(currentLevel){
 		self.currentLevel(currentLevel);
-	}
+		console.log(currentLevel);
+		self.currentTutorial(currentLevel.tutorial);
+	};
 	
 	self.addLevel = function(test){
-		self.currentWorld().levels.push(ko.observable({name: 'Level ' + (self.currentWorld().levels().length+1), world:self.currentWorld().name, timeLimit: 0, mode: ko.observableArray(0), roundList:ko.observableArray()}));
+		self.currentWorld().levels.push(ko.observable({
+			name: 'Level ' + (self.currentWorld().levels().length+1), 
+			world:self.currentWorld().name, 
+			maxTime: 0, 
+			mode: ko.observableArray(0), 
+			roundList:ko.observableArray(),
+			tutorial: {
+				mode: ko.observable(0),
+				displayPet: ko.observable(false),
+				roundList: ko.observableArray()
+			}
+		}));
 		console.log(test);
-	}
+	};
 	
 	self.addRound = function(){
 		
@@ -70,6 +89,23 @@ $.get('/data',function(data){
 			forever: ko.observable(false),
 			interpolate: ko.observable(false),
 			gravity: ko.observable(false),
+			entityConditions: ko.observableArray([]),
+			actions: ko.observableArray([]),
+			nextConditions: ko.observableArray([])
+		});
+	};
+	
+	self.addTutorialRound = function(){
+		
+		self.currentTutorial().roundList.push({
+			targets: ko.observable(0),
+			simultaneous: ko.observable(0),
+			startTime:  ko.observable(0),
+			message:  ko.observable(""),
+			forever: ko.observable(false),
+			interpolate: ko.observable(false),
+			gravity: ko.observable(false),
+			displayPet: ko.observable(false),
 			entityConditions: ko.observableArray([]),
 			actions: ko.observableArray([]),
 			nextConditions: ko.observableArray([])
