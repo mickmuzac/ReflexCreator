@@ -3,7 +3,7 @@ var fs = require('fs');
 var app = express();
 var dataObj;
 
-app.use(express.bodyParser());
+app.use(express.bodyParser({limit: '100mb'}));
 app.use(express.methodOverride());
 
 app.set('view engine', 'html');
