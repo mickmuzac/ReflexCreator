@@ -70,6 +70,7 @@ $.get('/data',function(data){
 			world:self.currentWorld().name, 
 			maxTime: 0, 
 			mode: ko.observableArray(0), 
+			song: ko.observableArray(0), 
 			roundList:ko.observableArray(),
 			tutorial: {
 				mode: ko.observable(0),

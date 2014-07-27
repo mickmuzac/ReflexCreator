@@ -22,6 +22,7 @@
 			<h1 data-bind="text: currentWorld().name"></h1>
 			<div data-bind="visible:currentLevel()">Max Time (seconds) <input type="text" data-bind="value:currentLevel().maxTime" /></div><br/>
 			<div data-bind="visible:currentLevel()">Game Type <input type="text" data-bind="value:currentLevel().mode" /></div><br/>
+			<div data-bind="visible:currentLevel()">Song Index <input type="text" data-bind="value:currentLevel().song" /></div><br/>
 			<div data-bind="visible:currentWorld()"><button data-bind="click:addLevel">Add Level</button></div>
 			<ul data-bind="foreach: currentWorld().levels">
 				<li><a data-bind="text: name, click: $root.selectLevel" href=""></a></li>
