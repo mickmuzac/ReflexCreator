@@ -1,5 +1,7 @@
 var express = require('express');
 var fs = require('fs');
+var atob = require('atob');
+var btoa = require('btoa');
 var app = express();
 var dataObj;
 
@@ -21,19 +23,19 @@ app.get('/:type(css|js)/:file([A-Za-z0-9\\.]+)', function(req, res){
 });
 
 app.get('/data', function(req, res){
-  res.end(dataObj);
+  res.end(btoa(dataObj));
 });
 
 app.post("/save", function(req, res){	
 	try{
 
-		fs.writeFile(__dirname + "/data/levels.json", req.body.base64, function(err){
-			dataObj = req.body.base64;
+		fs.writeFile(__dirname + "/data/levels.json", atob(req.body.base64), function(err){
+			dataObj = atob(req.body.base64);
 			res.end("data file successfully saved");
 		});
 
 		fs.writeFile(__dirname + "/data/worldList.json", JSON.stringify({worldList:JSON.parse(new Buffer(req.body.base64, 'base64').toString('binary')).worldList}), function(err){
-			dataObj = req.body.base64;
+			dataObj = atob(req.body.base64);
 			res.end("data file successfully saved");
 		});
 	}

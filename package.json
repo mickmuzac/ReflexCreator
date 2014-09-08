@@ -4,7 +4,9 @@
 	"description": "Level creator for Impressflow reflex based games",
 	"dependencies": {
 		"express": "3.4.x",
-		"hogan-express": "0.5.x"
+		"hogan-express": "0.5.x",
+		"atob": "1.1.x",
+		"btoa": "1.1.x"
     },
 	"author":"Mick Muzac <mmuzac23@gmail.com>"
 }
