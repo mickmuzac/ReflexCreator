@@ -50,15 +50,14 @@ app.post("/save", function(req, res){
 //Initialize
 (function(){
 
-	fs.exists(__dirname + "/data/levels.json", function(exists){
-		if(exists){
-			fs.readFile(__dirname + "/data/levels.json", function(err, data){
-				dataObj = data;
-			});
-		}
+	fs.readFile(__dirname + "/data/levels.json", function(err, data){
+		if(!err) dataObj = data;
 		
 		else{
-			dataObj = '';
+			fs.readFile(__dirname + "/data/worldList.json", function(err, data){
+				if(err) dataObj = '';
+				else dataObj = data;
+			});
 		}
 	});
 
