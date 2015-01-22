@@ -35,7 +35,7 @@ $.get('/data',function(data){
 	var self = reflexModel;
 	
 	self.nextConditions = ['time', 'total'],
-	self.entityConditions = ['type', 'x', 'y', 'min x', 'max x', 'min y', 'max y', 'size', 'duration', 'delay', 'difficulty', 'direction', 'pointer'],
+	self.entityConditions = ['type', 'x', 'y', 'min x', 'max x', 'min y', 'max y', 'size', 'duration', 'delay', 'difficulty', 'direction', 'pointer', 'numbered', 'colored'],
 	self.actions = ['deltax', 'deltay'],
 	self.typeValues = ['circle', 'square', 'triangle'];
 	
