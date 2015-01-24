@@ -44,6 +44,18 @@ $.get('/data',function(data){
 	self.currentLevel = ko.observable(false);
 	self.currentTutorial = ko.observable(false);
 	
+	self.deleteRound = function(round){
+		console.log(round);
+		self.currentLevel().roundList.remove(round);
+		return false;
+	};
+	
+	self.deleteTutorialRound = function(round){
+		console.log(round);
+		self.currentTutorial().roundList.remove(round);
+		return false;
+	};
+	
 	self.addWorld  = function(){
 		self.worldList.push(ko.observable({
 			name: self.currentWorldName(), 

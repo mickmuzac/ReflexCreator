@@ -37,9 +37,11 @@
 				<div class="roundElement"> 
 
 					<h2 data-bind="text:'Round ' + ($index()+1)"></h2>
-					<span>targets</span>
-					<input type="text" data-bind="value:targets" />
-
+					<a href="" data-bind="click:$root.deleteRound">Delete</a><br/><br/>
+					<div>
+						<span>targets</span>
+						<input type="text" data-bind="value:targets" />
+					</div>
 					<span>simultaneous</span>
 					<input type="text" data-bind="value:simultaneous" />
 
@@ -104,6 +106,9 @@
 				<div class="roundElement"> 
 
 					<h2 data-bind="text:'Round ' + ($index()+1)"></h2>
+					
+					<a href="" data-bind="click:$root.deleteTutorialRound">Delete</a><br/><br/>
+					
 					<span>targets</span>
 					<input type="text" data-bind="value:targets" />
 
