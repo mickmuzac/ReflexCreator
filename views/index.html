@@ -31,6 +31,7 @@
 		
 		<div class="roundList">
 			<h1 data-bind="text: currentLevel().name"></h1>
+			<div><button data-bind="click:deleteLevel, visible: currentLevel()">Delete Level</button></div>
 			<div><button data-bind="click:addRound, visible: currentLevel()">Add Round</button></div>
 			
 			<div data-bind="foreach: currentLevel().roundList"> 

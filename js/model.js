@@ -44,6 +44,12 @@ $.get('/data',function(data){
 	self.currentLevel = ko.observable(false);
 	self.currentTutorial = ko.observable(false);
 	
+	self.deleteLevel = function(){
+		self.currentWorld().levels.remove(self.currentLevel());
+		self.currentLevel(false);
+		self.currentTutorial(false);
+	};
+
 	self.deleteRound = function(round){
 		console.log(round);
 		self.currentLevel().roundList.remove(round);
@@ -77,7 +83,7 @@ $.get('/data',function(data){
 	};
 	
 	self.addLevel = function(test){
-		self.currentWorld().levels.push(ko.observable({
+		self.currentWorld().levels.push({
 			name: 'Level ' + (self.currentWorld().levels().length+1), 
 			world:self.currentWorld().name, 
 			maxTime: 0, 
@@ -89,7 +95,7 @@ $.get('/data',function(data){
 				displayPet: ko.observable(false),
 				roundList: ko.observableArray()
 			}
-		}));
+		});
 		console.log(test);
 	};
 	
