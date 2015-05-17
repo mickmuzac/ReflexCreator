@@ -146,6 +146,12 @@ $.get('/data',function(data){
 		parent.entityConditions.remove(obj);
 	}
 	
+	self.deleteEntityAction = function(obj, parent){
+		
+		console.log(obj, parent);
+		parent.actions.remove(obj);
+	}
+	
 	
 	ko.applyBindings(reflexModel);
 });

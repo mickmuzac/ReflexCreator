@@ -93,6 +93,7 @@
 						<div data-bind="foreach: actions">
 							<select data-bind="options: $root.actions, value:key"></select>
 							<input type="text" data-bind="value:value" />
+							<span data-bind="click:function(obj){$root.deleteEntityAction(obj, $parent)}">x</span>
 						</div>
 					</div>
 				</div>
